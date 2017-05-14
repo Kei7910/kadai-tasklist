@@ -23,5 +23,5 @@ Rails.application.routes.draw do
   
   #上記はすべて下記１行で置き換えられる
   resources :tasks
-  resources :users, only: [:index, :show, :new, :create]
+  resources :users, only: [:new, :create]
 end

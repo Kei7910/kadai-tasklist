@@ -1,10 +1,9 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
-  
+  before_action :correct_user, only:  [:show, :edit, :update, :destroy]
 
   def index
-    @tasks = []
-    #@tasks = current_user.tasks.order(created_at: :desc) if current_user
+    @tasks = current_user.tasks.order(created_at: :desc) if current_user
   end
 
   def show
@@ -55,6 +54,10 @@ class TasksController < ApplicationController
   
   def set_task
     @task = Task.find(params[:id])
+  end
+  
+  def correct_user
+    redirect_to root_url if current_user != @task.user
   end
 end
 
